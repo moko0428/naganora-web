@@ -6,7 +6,13 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
-  theme: {},
-  plugins: [],
+  theme: {
+    extend: {
+      textColor: {
+        'black-blue': '#38BDF9',
+      },
+    },
+  },
+  plugins: [require('@tailwindcss/forms'), require('daisyui')],
 };
 export default config;
