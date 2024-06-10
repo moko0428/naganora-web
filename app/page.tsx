@@ -6,7 +6,12 @@ export default function Home() {
       <div className="my-auto flex flex-col items-center gap-4 *:font-medium">
         <span className="text-7xl text-cyan-500">naganora</span>
         <h1 className="text-4xl">나가노라</h1>
-        <h2 className="text-2xl">나만의 가치있게 노는 라이프에 어서오세요!</h2>
+        <h2 className="text-2xl">
+          <span className="text-cyan-500">나</span>만의{' '}
+          <span className="text-cyan-500">가</span>치있게{' '}
+          <span className="text-cyan-500">노</span>는{' '}
+          <span className="text-cyan-500">라</span>이프에 어서오세요!
+        </h2>
       </div>
       <div className="flex flex-col items-center gap-3 w-full">
         <Link href="/create-account" className="primary-btn py-2.5 text-lg">

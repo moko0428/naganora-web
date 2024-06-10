@@ -10,11 +10,22 @@ export default function SMSLogin() {
         <h2 className="text-xl">나가노라에 오신것을 환영합니다.</h2>
       </div>
       <form className="flex flex-col gap-3">
-        <FormInput type="number" placeholder="전화번호" required errors={[]} />{' '}
-        <FormInput type="number" placeholder="인증코드" required errors={[]} />
+        <FormInput
+          name="phoneNumber"
+          type="number"
+          placeholder="전화번호"
+          required
+          errors={[]}
+        />{' '}
+        <FormInput
+          name="verifyCode"
+          type="number"
+          placeholder="인증코드"
+          required
+          errors={[]}
+        />
         <FormBtn loading={false} text="로그인" />
       </form>
-      <SocialLogin />
     </div>
   );
 }
