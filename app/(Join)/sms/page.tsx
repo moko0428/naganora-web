@@ -24,7 +24,7 @@ export default function SMSLogin() {
           required
           errors={[]}
         />
-        <FormBtn loading={false} text="로그인" />
+        <FormBtn text="로그인" />
       </form>
     </div>
   );
