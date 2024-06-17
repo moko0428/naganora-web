@@ -1,9 +1,10 @@
 'use server';
+import {
+  PASSWORD_MIN_LENGTH,
+  PASSWORD_REGEX,
+  PASSWORD_REGEX_ERROR,
+} from '@/app/lib/constants';
 import { z } from 'zod';
-
-const passwordRegex = new RegExp(
-  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*?[#?!@$%^&*-]).+$/
-);
 
 const checkNickname = (nickname: string) =>
   !nickname.includes('대충 필터링 배열');
@@ -23,20 +24,18 @@ const formSchema = z
         invalid_type_error: '이름은 문자로 작성해야합니다.',
         required_error: '이름을 작성해주세요.',
       })
-      .min(3, '이름은 3글자 이상이어야 합니다. (3 ~ 10)')
-      .max(10, '이름은 10자 이하여야 합니다. (3 ~ 10)')
+      .min(2, '이름은 2글자 이상이어야 합니다.')
       .toLowerCase()
       .transform((nickname) => `🔥${nickname}`)
       .refine(checkNickname, '포함할 수 없는 문자입니다.'),
     email: z.string().email().trim().toLowerCase(),
     password: z
       .string()
-      .min(4, '비밀번호는 최소 4자 입니다.')
-      .regex(
-        passwordRegex,
-        '비밀번호는 소문자, 대문자, 숫자, 특수문자를 포함해야합니다.'
-      ),
-    passwordConfirm: z.string().min(4, '비밀번호는 최소 4자 입니다.'),
+      .min(PASSWORD_MIN_LENGTH, '비밀번호는 최소 4자 입니다.')
+      .regex(PASSWORD_REGEX, PASSWORD_REGEX_ERROR),
+    passwordConfirm: z
+      .string()
+      .min(PASSWORD_MIN_LENGTH, '비밀번호는 최소 4자 입니다.'),
   })
   .refine(checkPassword, {
     message: '비밀번호와 동일하지 않습니다.',
