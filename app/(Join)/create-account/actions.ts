@@ -4,6 +4,7 @@ import {
   PASSWORD_REGEX,
   PASSWORD_REGEX_ERROR,
 } from '@/app/lib/constants';
+import db from '@/app/lib/db';
 import { z } from 'zod';
 
 const checkNickname = (nickname: string) =>
@@ -17,6 +18,28 @@ const checkPassword = ({
   passwordConfirm: string;
 }) => password === passwordConfirm;
 
+const checkUniqueNickname = async (nickname: string) => {
+  const user = await db.user.findUnique({
+    where: {
+      nickname,
+    },
+    select: {
+      id: true,
+    },
+  });
+  return !Boolean(user);
+};
+const checkUniqueEmail = async (email: string) => {
+  const user = await db.user.findUnique({
+    where: {
+      email,
+    },
+    select: {
+      id: true,
+    },
+  });
+  return !Boolean(user);
+};
 const formSchema = z
   .object({
     nickname: z
@@ -26,9 +49,15 @@ const formSchema = z
       })
       .min(2, '이름은 2글자 이상이어야 합니다.')
       .toLowerCase()
-      .transform((nickname) => `🔥${nickname}`)
-      .refine(checkNickname, '포함할 수 없는 문자입니다.'),
-    email: z.string().email().trim().toLowerCase(),
+      // .transform((nickname) => `🔥${nickname}`)
+      .refine(checkNickname, '포함할 수 없는 문자입니다.')
+      .refine(checkUniqueNickname, '이미 사용중인 닉네임입니다.'),
+    email: z
+      .string()
+      .email()
+      .trim()
+      .toLowerCase()
+      .refine(checkUniqueEmail, '이미 사용중인 이메일입니다.'),
     password: z
       .string()
       .min(PASSWORD_MIN_LENGTH, '비밀번호는 최소 4자 입니다.')
@@ -49,10 +78,13 @@ export async function createAccount(prevState: any, formData: FormData) {
     passwordConfirm: formData.get('passwordConfirm'),
   };
   // safeParse는 에러를 throw 하지 않는다.
-  const result = formSchema.safeParse(data);
+  const result = await formSchema.safeParseAsync(data);
   if (!result.success) {
     return result.error.flatten();
   } else {
-    console.log(result.data);
+    // 비밀번호 해싱
+    // 유저 db 저장
+    // 유저 로그인
+    // 사용자가 로그인하면 /home으로 redirect
   }
 }
