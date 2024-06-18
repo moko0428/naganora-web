@@ -6,6 +6,7 @@ import {
 } from '@/app/lib/constants';
 import db from '@/app/lib/db';
 import { z } from 'zod';
+import bcrypt from 'bcrypt';
 
 const checkNickname = (nickname: string) =>
   !nickname.includes('대충 필터링 배열');
@@ -83,7 +84,19 @@ export async function createAccount(prevState: any, formData: FormData) {
     return result.error.flatten();
   } else {
     // 비밀번호 해싱
+    const hashedPassword = await bcrypt.hash(result.data.password, 12);
     // 유저 db 저장
+    const user = await db.user.create({
+      data: {
+        nickname: result.data.nickname,
+        email: result.data.email,
+        password: hashedPassword,
+      },
+      select: {
+        id: true,
+      },
+    });
+    console.log(user);
     // 유저 로그인
     // 사용자가 로그인하면 /home으로 redirect
   }
