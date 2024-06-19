@@ -10,6 +10,7 @@ import bcrypt from 'bcrypt';
 import { getIronSession } from 'iron-session';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import getSession from '@/app/lib/session';
 
 const checkNickname = (nickname: string) =>
   !nickname.includes('대충 필터링 배열');
@@ -100,13 +101,9 @@ export async function createAccount(prevState: any, formData: FormData) {
       },
     });
     // 유저 로그인
-    const cookie = await getIronSession(cookies(), {
-      cookieName: 'moko',
-      password: process.env.COOKIE_PASSWORD!,
-    });
-    //@ts-ignore
-    cookie.id = user.id;
-    await cookie.save();
+    const session = await getSession();
+    session.id = user.id;
+    await session.save();
     // 사용자가 로그인하면 /home으로 redirect
     redirect('/profile');
   }
