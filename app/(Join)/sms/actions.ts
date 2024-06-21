@@ -1,6 +1,7 @@
 'use server';
 
 import crypto from 'crypto';
+import twilio from 'twilio';
 import { z } from 'zod';
 import validator from 'validator';
 import { redirect } from 'next/navigation';
@@ -91,6 +92,15 @@ export async function smsLogin(prevState: ActionState, formData: FormData) {
         },
       });
       // twillo에 토큰 보내기
+      // const client = twilio(
+      //   process.env.TWILIO_ACCOUNT_SID!,
+      //   process.env.TWILIO_AUTH_TOKEN!
+      // );
+      // await client.messages.create({
+      //   body: `당신의 나가노라 인증 코드는 ${token} 입니다.`,
+      //   from: process.env.TWILIO_PHONE_NUMBER!,
+      //   to: process.env.MY_PHONE_NUMBER!,
+      // });
       return {
         token: true,
       };
