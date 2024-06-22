@@ -6,5 +6,8 @@
 - TailwindCSS (CSS)
 - Zod (벨리데이션)
 - Prisma(데이터베이스)
+
+## Auth
+
 - iron-session (로그인 쿠키)
 - Twilio (sms messaging)
