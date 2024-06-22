@@ -23,7 +23,7 @@ export default function TabBar() {
     <div className="fixed bottom-0 w-full mx-auto max-w-screen-md grid grid-cols-5 border-neutral-600 border-t px-5 py-3 *:text-white">
       <Link href={'/products'} className="flex flex-col items-center gap-px">
         {pathname === '/products' ? (
-          <SolidHomeIcon className="size-7" />
+          <SolidHomeIcon className="size-7 text-main" />
         ) : (
           <OutlineHomeIcon className="size-7" />
         )}
@@ -31,7 +31,7 @@ export default function TabBar() {
       </Link>
       <Link href={'/community'} className="flex flex-col items-center gap-px">
         {pathname === '/community' ? (
-          <SolidNewspaper className="size-7" />
+          <SolidNewspaper className="size-7 text-main" />
         ) : (
           <OutlineNewspaperIcon className="size-7" />
         )}
@@ -39,7 +39,7 @@ export default function TabBar() {
       </Link>
       <Link href={'/chats'} className="flex flex-col items-center gap-px">
         {pathname === '/chats' ? (
-          <SolidChatIcon className="size-7" />
+          <SolidChatIcon className="size-7 text-main" />
         ) : (
           <OutlineChatIcon className="size-7" />
         )}
@@ -47,7 +47,7 @@ export default function TabBar() {
       </Link>
       <Link href={'/live'} className="flex flex-col items-center gap-px">
         {pathname === '/live' ? (
-          <SolidVideoCameraIcon className="size-7" />
+          <SolidVideoCameraIcon className="size-7 text-main" />
         ) : (
           <OutlineVideoCameraIcon className="size-7" />
         )}
@@ -55,7 +55,7 @@ export default function TabBar() {
       </Link>
       <Link href={'/profile'} className="flex flex-col items-center gap-px">
         {pathname === '/profile' ? (
-          <SolidUserIcon className="size-7" />
+          <SolidUserIcon className="size-7 text-main" />
         ) : (
           <OutlineUserIcon className="size-7" />
         )}

@@ -11,6 +11,9 @@ const config: Config = {
       backgroundColor: {
         main: 'rgb(6, 182, 212)',
       },
+      textColor: {
+        main: 'rgb(6, 182, 212)',
+      },
     },
   },
   plugins: [require('@tailwindcss/forms')],
