@@ -11,3 +11,7 @@
 
 - iron-session (로그인 쿠키)
 - Twilio (sms messaging)
+
+# Image
+
+- fill, className="object-cover", quality={10}
