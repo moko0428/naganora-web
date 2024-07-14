@@ -67,6 +67,7 @@ export default async function ProductDetail({
               src={product.user.avatar}
               width={40}
               height={40}
+              className="object-cover"
               alt={product.user.nickname}
             />
           ) : (
